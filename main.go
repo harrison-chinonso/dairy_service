@@ -10,6 +10,11 @@ import (
 	"log"
 )
 
+// In this main function, the environment variables are loaded with the loadEnv function and the connection is established
+// with the database using the loadDatabase function. If the connection was opened successfully, the AutoMigrate() function is
+// called to create the relevant tables and columns for the User and Entry structs (if they don’t already exist).
+// In addition to loading the environment variables and database connection, i am also creating a Gin router and declaring
+// two routes for registration and login respectively using the serveApplication function.
 func main() {
 	loadEnv()
 	loadDatabase()

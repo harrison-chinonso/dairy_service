@@ -9,6 +9,8 @@ import (
 
 var Database *gorm.DB
 
+// The Connect function retrieves the environment variables required to set up a database connection and then opens the
+// connection using the GORM PostgreSQL driver.
 func Connect() {
 	var err error
 	host := os.Getenv("DB_HOST")

@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// The Register method validates the JSON request, creates a new user, and returns the details of the saved user as a JSON response.
 func Register(context *gin.Context) {
 	var input model.AuthenticationInput
 
