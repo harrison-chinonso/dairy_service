@@ -3,6 +3,7 @@ package main
 import (
 	"dairy_service/controller"
 	"dairy_service/database"
+	"dairy_service/middleware"
 	"dairy_service/model"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -41,6 +42,14 @@ func serveApplication() {
 	publicRoutes.POST("/register", controller.Register)
 	publicRoutes.POST("/login", controller.Login)
 
-	router.Run(":8000")
+	protectedRoutes := router.Group("/api")
+	protectedRoutes.Use(middleware.JWTAuthMiddleware())
+	protectedRoutes.POST("/entry", controller.AddEntry)
+	protectedRoutes.GET("/entry", controller.GetAllEntries)
+
+	err := router.Run(":8000")
+	if err != nil {
+		return
+	}
 	fmt.Println("Server running on port 8000")
 }
